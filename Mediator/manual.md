@@ -87,4 +87,5 @@ ConcreteMediator은 Mediator의 상속을 받으며 component1과 2를 멤버 �
 void ClientCode() {
   Component1 *c1 = new Component1; // Component1의 객체를 생성
   Component2 *c2 = new Component2; // Component2의 객체를 생성
-  ConcreteMediator *mediator = new ㄴ
+  ConcreteMediator *mediator = new
+```
