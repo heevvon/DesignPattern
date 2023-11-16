@@ -87,24 +87,4 @@ ConcreteMediator은 Mediator의 상속을 받으며 component1과 2를 멤버 �
 void ClientCode() {
   Component1 *c1 = new Component1; // Component1의 객체를 생성
   Component2 *c2 = new Component2; // Component2의 객체를 생성
-  ConcreteMediator *mediator = new ConcreteMediator(c1, c2);
- // ConcreteMediator 객체를 생성하고 c1과 c2를 연결한다.
-  std::cout << "Client triggers operation A.\n";
-  c1->DoA(); // DoA 함수를 호출한다.
-  std::cout << "\n";
-  std::cout << "Client triggers operation D.\n";
-  c2->DoD(); // DoD 함수를 호출한다.
-
-  delete c1; // c1을 삭제한다.
-  delete c2; // c2를 삭제한다.
-  delete mediator; // mediator를 삭제한다.
-}
-
-int main() {
-  ClientCode();
-  return 0;
-}
-```
-# 장단점
-장점: 다양한 컴포넌트 간의 통신을 한곳으로 추출하여 코드를 이해하고 쉽게 유지 및 관리할 수 있다.
-또한 실제 컴포넌트들을
+  ConcreteMediator *mediator = new ㄴ
