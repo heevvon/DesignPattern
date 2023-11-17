@@ -2,8 +2,7 @@
 ## 프로토타입 정의
 프로토타입 패턴은 코드를 그들의 클래스에 의존시키지 않고, 기존 객체들을 복사할 수 있도록 하는 생성 디자인 패턴이다.
 실제 제품을 만들기에 앞서 테스트를 위한 샘플 제품을 만드는데 이때, 샘플 제품을 프로토타입이라고 칭한다.
-프로토타입 패턴은 객체를 생성하는데 비용이 많이 들고, 비슷한 객체가 이미 있는 경우에 사용된다. 
-또한, 복사를 위해 C++에서 제공하는 추상 메서드인 clone()을 사용한다.    
+프로토타입 패턴은 비슷한 객체가 이미 있는 경우에 사용되고, 복사를 위해 C++에서 제공하는 추상 메서드인 clone()을 사용한다.    
 즉, 프로토타입 패턴은 원본 객체를 새로운 객체에 복사하여 필요에 따라 수정하는 매커니즘을 제공한다.
 
 ## 프로토타입 구조
@@ -17,11 +16,56 @@ virtual [클래스 이름]* clone() = 0;
 하위 클래스에서는 자신의 자료형과 같은 새로운 객체를 반환하도록 clone()을 구현한다.  
 아래는 예시이다.
 ```C++
-class Ghost : public Monster {
+class Zombie : public Monster {
 public:
   Ghost(int health, int speed) : Monster(health, speed) {}
   virtual Monster* clone() {
-    return new Ghost(health, speed);
+    return new Zombie(health, speed);
   }
-}
+};
 ```
+만약 상위 클래스인 Monster를 상속받는 모든 클래스에 clone 메서드가 있다면, 스포너 클래스를 종류별로 만들 필요 없이 하나만 만들면 된다.  
+아래는 스포너 클래스의 예시이다.
+```C++
+class Spawner {
+  Monster* prototype;
+public:
+  Spawner(Monster* p) : prototype(p) {}
+
+  Monster* spawnMonster() {
+    return prototype->clone();
+  }
+};
+```
+스포너 클래스의 내부에는 Monster 객체가 존재한다. 이 객체는 자기와 같은 Monster 객체를 복사해 만들어내는 스포너 역할만 한다. 이렇게 스포너 클래스가 있는 상태에서 좀비 스포너를 만들려면 원형으로 사용할 유령 인스턴스를 만든 후에 스포너에 전달한다.
+```C++
+Monster* zombiePrototype = new Zombie(15, 3);
+Spawner* zombieSpawner = new Spawner(zombiePrototype);
+```
+### 템플릿을 사용하는 경우
+스포너 클래스를 이용해 인스턴스를 생성하고 싶지만 특정 몬스터 클래스를 직접 입력하기 싫다면 몬스터 클래스를 템플릿 타입 매개변수로 전달하면 된다.   
+아래는 템플릿을 사용한 예시이다.
+``` C++
+template <class T>
+class SpawnerTemplate : public Spawner {
+public:
+  virtual Monster* spawnMonster() {
+    retrun new T();
+  }
+};
+```
+템플릿으로 만들면 사용법은 다음과 같다.
+```C++
+Spawner*zombieSpawner = new SpawnerTemplate<Zombie>();
+```
+
+## 프로토타입 장점
+1. 복잡한 객체를 만드는 과정을 숨길 수 있다.
+2. 기존 객체를 복제하는 과정이 새 인스턴스를 만드는 것보다 비용면에서 효율적이다.
+3. clone에서 반환하는 타입이 clone을 정의한 클래스와 반드시 동일할 필요는 없다.  
+   클래스의 게층 구조가 있을 때, 추상화된 타입을 반환할 수 있는 유연성이 있다.
+4. 프로토타입의 클래스 뿐만 아니라 상태도 같이 복제한다. 원형 클래스에 사용할   
+   객체를 잘 설정하면 속도, 힘 등과 같은 다양한 특성의 객체를 쉽게 만들 수 있다.
+
+## 문제점
+복사하고 싶은 객체가 있고, 그 객체의 정확한 복사본을 만들고 싶다면 원본 객체의 모든 데이터들을 살펴본 후 해당 데이터들을 새 객체에 복사해야 한다. 하지만 객체의 데이터들 중 일부가 비공개여서 객체 자체의 외부에서 볼 수 없을 수도 있기 때문에 모든 객체를 이런 식으로 복사할 수 없다. 
