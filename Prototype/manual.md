@@ -40,17 +40,17 @@
 - 단순히 이름을 검색하는 것보다 더 나은 검색 기준이 필요한 경우 훨 씬 더 탄탄한 레지스트리를 구축할 수 있다.
 
 ### 상위 클래스
-상위 클래스에 추상 메서드 ``clone``을 추가한다.
+상위 클래스에 추상 메서드인 ``clone``이 존재해야 한다.
 ```C++
 virtual [클래스 이름]* clone() = 0;
 ```
 ### 하위 클래스
 하위 클래스에서는 자신의 자료형과 같은 새로운 객체를 반환하도록 ``clone``을 구현한다.  
-아래는 예시이다.
+아래는 상위 클래스를 Monster, 하위 클래스를 Zombie로 설정하여 좀비를 복제하는 프로그램 예시이다.
 ```C++
 class Zombie : public Monster {
 public:
-  Ghost(int health, int speed) : Monster(health, speed) {}
+  Zombie(int health, int speed) : Monster(health, speed) {}
   virtual Monster* clone() {
     return new Zombie(health, speed);
   }
@@ -69,10 +69,12 @@ public:
   }
 };
 ```
-스포너 클래스의 내부에는 Monster 객체가 존재한다. 이 객체는 자기와 같은 Monster 객체를 복사해 만들어내는 스포너 역할만 한다. 이렇게 스포너 클래스가 있는 상태에서 좀비 스포너를 만들려면 원형으로 사용할 유령 인스턴스를 만든 후에 스포너에 전달한다.
+스포너 클래스의 내부에는 Monster 객체가 존재한다. 이 객체는 자기와 같은 Monster 객체를 복사해 만들어내는 스포너 역할만 한다. 이렇게 스포너 클래스가 있는 상태에서 좀비 스포너를 만들려면 원형으로 사용할 좀비 인스턴스를 만든 후에 스포너에 전달한다.
 ```C++
-Monster* zombiePrototype = new Zombie(15, 3);
-Spawner* zombieSpawner = new Spawner(zombiePrototype);
+int main () {
+  Monster* zombiePrototype = new Zombie(15, 3);
+  Spawner* zombieSpawner = new Spawner(zombiePrototype);
+}
 ```
 ### 템플릿을 사용하는 경우
 스포너 클래스를 이용해 인스턴스를 생성하고 싶지만 특정 몬스터 클래스를 직접 입력하기 싫다면 몬스터 클래스를 템플릿 타입 매개변수로 전달하면 된다.   
@@ -85,8 +87,4 @@ public:
     retrun new T();
   }
 };
-```
-템플릿으로 만들면 사용법은 다음과 같다.
-```C++
-Spawner*zombieSpawner = new SpawnerTemplate<Zombie>();
 ```
