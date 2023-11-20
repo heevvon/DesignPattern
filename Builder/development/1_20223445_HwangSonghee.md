@@ -15,9 +15,9 @@ public:
     void showInfo() const {
         cout << "[캐릭터 정보]" << endl;
         cout << " *이름: " << name << endl;
-        cout << "*레벨: " << level << endl;
-        cout << "*무기: " << weapon << "(공격력:" << weaponAttack << ')' << endl;
-        cout << "*방어구: " << armor << endl;
+        cout << " *레벨: " << level << endl;
+        cout << " *무기: " << weapon << "(공격력:" << weaponAttack << ')' << endl;
+        cout << " *방어구: " << armor << endl;
     }
 };
 // 빌더 인터페이스
