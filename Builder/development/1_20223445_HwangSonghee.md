@@ -24,9 +24,9 @@ public:
 class Builder {
 public:
     virtual ~Builder() {}
-    virtual Builder& setName(const string& name) = 0;
-    virtual Builder& setLevel(int level) = 0;
-    virtual Builder& setWeapon(const string& weapon, int weaponAttack) = 0;
-    virtual Builder& setArmor(const string& armor) = 0;
+    virtual void setName(const string& name) = 0;
+    virtual void setLevel(int level) = 0;
+    virtual void setWeapon(const string& weapon, int weaponAttack) = 0;
+    virtual void setArmor(const string& armor) = 0;
 };
 ```
