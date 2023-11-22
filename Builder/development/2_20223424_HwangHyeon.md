@@ -80,7 +80,7 @@ public:
     }
 
     Character* getResult() override {
-        return character;     // 최종적으로 환성된 캐릭터 객체 반환
+        return character;     // 최종적으로 완성된 캐릭터 객체 반환
     }
 };
 
