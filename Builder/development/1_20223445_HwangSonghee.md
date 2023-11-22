@@ -24,10 +24,10 @@ public:
 class Builder {
 public:
     virtual ~Builder() {}
-    virtual void setName(const string name) = 0;
+    virtual void setName(const string& name) = 0;
     virtual void setLevel(int level) = 0;
-    virtual void setWeapon(const string weapon, int weaponAttack) = 0;
-    virtual void setArmor(const string armor) = 0;
+    virtual void setWeapon(const string& weapon, int weaponAttack) = 0;
+    virtual void setArmor(const string& armor) = 0;
 };
 int main(){
     return 0;
