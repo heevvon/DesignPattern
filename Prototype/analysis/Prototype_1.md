@@ -368,3 +368,27 @@ void Client(PrototypeFactory& prototype_factory) {
 }
 ```
 - ``cout`` 객체를 사용하여 화면에 'Let's create a Prototype 1' 메세지를 출력한다.
+- ``PrototypeFactory``를 통해 ``Type::PROTOTYPE_1``에 해당하는 프로토타입을 부모클래스인 ``Prototype`` 포인터로 가리킨다.
+- 생성된 프로토타입 객체의 ``Method`` 함수를 호출하여 ``prototype_field_`` 값을 설정하고 객체의 이름과 상태를 출력한다.
+- 이후 delete를 이용하여 동적으로 할당된 메모리를 삭제한다.
+    
+1. ``Client``함수는 두 종류의 프로토타입을 생성하고, 각각의 객체에 대해 특정 동작을 수행하여 ㅍ로토타입 패턴을 사용하는 예시를 보여준다.
+
+### main 함수
+```C++
+int main() {
+    PrototypeFactory* prototype_factory = new PrototypeFactory();
+    Client(*prototype_factory);
+    delete prototype_factory;
+
+    return 0;
+}
+```
+- ``prototype_factory``객체를 포인터 변수로 생성한뒤, ``PrototypeFactory``객체를 동적으로 생성한다.
+- ``Client``함수를 호출하고 ``prototype_factory``포인터를 전달한다.
+  > ``Client``함수 내에서는 이 ``prototype_factory``를 통해 프로토타입을 생성하고 동작을 수행함
+- 이후 delete를 이용하여 동적으로 할당된 ``PrototypeFactory`` 객체의 메모를 삭제하는데, 이는 프로그램이 종료될 때 메모리 누수 방지 역할을 함
+    
+1. ``main`` 함수는 프로토타입 패턴을 사용하는 코드를 실행하는 역할을 한다.
+2. ``PrototypeFactory``를 생성하고, 이를 ``Client`` 함수에 전달하여 프로토타입이 어떻게 작동하는지 보여준다.
+3. 마지막으로, 동적으로 할당된 메모리를 삭제하여 안정적인 프로그램 종료를 보장한다.
