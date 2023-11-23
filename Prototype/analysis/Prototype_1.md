@@ -387,7 +387,7 @@ int main() {
 - ``prototype_factory``객체를 포인터 변수로 생성한뒤, ``PrototypeFactory``객체를 동적으로 생성한다.
 - ``Client``함수를 호출하고 ``prototype_factory``포인터를 전달한다.
   > ``Client``함수 내에서는 이 ``prototype_factory``를 통해 프로토타입을 생성하고 동작을 수행한다.
-- 이후 delete를 이용하여 동적으로 할당된 ``PrototypeFactory`` 객체의 메모를 삭제하는데, 이는 프로그램이 종료될 때 메모리 누수 방지 역할을 함
+- 이후 delete를 이용하여 동적으로 할당된 ``PrototypeFactory`` 객체의 메모를 삭제하는데, 이는 프로그램이 종료될 때 메모리 누수 방지 역할을 한다.
     
 1. ``main`` 함수는 프로토타입 패턴을 사용하는 코드를 실행하는 역할을 한다.
 2. ``PrototypeFactory``를 생성하고, 이를 ``Client`` 함수에 전달하여 프로토타입이 어떻게 작동하는지 보여준다.
