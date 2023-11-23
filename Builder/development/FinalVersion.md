@@ -74,7 +74,7 @@ public:
         character->setWeapon(weapon, weaponAttack);    
     }
     void setArmor(const string& armor) override {
-        character->setArmor(armor);     // 장신구 설정
+        character->setArmor(armor);     
     }
 
     Character* getResult() override {
