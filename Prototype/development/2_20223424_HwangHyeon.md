@@ -64,15 +64,12 @@ class ZombieSpawner : public Spawner {
     string nameZombie;
     double attackZombie;
 public:
-    //생성자
     ZombieSpawner(int count, string name, double attack)
         : Spawner(count), nameZombie(name), attackZombie(attack) {}
 
-    // 복제 함수 구현
     Spawner* clone() const override {
         return new ZombieSpawner(*this);
     }
-    // 스폰 함수 구현
     void spawn() const override {
         cout << "좀비가 생성되었습니다!" << endl;
     }
@@ -82,15 +79,12 @@ class SpiderSpawner : public Spawner {
     string nameSpider;
     double attackSpider;
 public:
-    // 생성자
     SpiderSpawner(int count, string name, double attack)
         : Spawner(count), nameSpider(name), attackSpider(attack) {}
 
-    // 복제 함수 구현
     Spawner* clone() const override {
         return new SpiderSpawner(*this);
     }
-    // 스폰 함수 구현
     void spawn() const override {
         cout << "거미가 생성되었습니다!" << endl;
     }
