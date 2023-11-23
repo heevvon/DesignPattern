@@ -5,7 +5,7 @@ using namespace std;
 
 // 캐릭터 클래스
 class Character {
-    string name; //이름
+    string name; //직업
     int level; //레벨
     string weapon; //무기
     int weaponAttack; //무기의 공격력
@@ -14,7 +14,7 @@ public:
     // 캐릭터 정보 출력 함수
     void showInfo() const {
         cout << "[캐릭터 정보]" << endl;
-        cout << " *이름: " << name << endl;
+        cout << " *직업: " << name << endl;
         cout << " *레벨: " << level << endl;
         cout << " *무기: " << weapon << "(공격력:" << weaponAttack << ')' << endl;
         cout << " *방어구: " << armor << endl;
