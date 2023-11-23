@@ -5,13 +5,12 @@
 #include <string>
 using namespace std;
 
-// 캐릭터 클래스
 class Character {
-    string name; //직업
-    int level = 1; //레벨
-    string weapon; //무기
-    int weaponAttack = 1; //무기의 공격력
-    string armor; //방어구
+    string name; 
+    int level = 1; 
+    string weapon;
+    int weaponAttack = 1; 
+    string armor;
 public:
     Character() = default;
 
@@ -22,7 +21,7 @@ public:
         weaponAttack = other.weaponAttack;
         armor = other.armor;
     }
-    // 멤버 함수
+
     void setName(const string newName) {
         name = newName;
     }
@@ -36,7 +35,7 @@ public:
     void setArmor(const string& newArmor) {
         armor = newArmor;
     }
-    // 캐릭터 정보 출력 함수
+   
     void showInfo() const {
         cout << "[캐릭터 정보]" << endl;
         cout << " * 직업: " << name << endl;
@@ -45,7 +44,7 @@ public:
         cout << " * 방어구: " << armor << endl;
     }
 };
-// 빌더 인터페이스
+
 class CharacterBuilder {
 public:
     virtual ~CharacterBuilder() {}
@@ -56,43 +55,38 @@ public:
     virtual Character* getResult() = 0;
 };
 
-// 콘크리트 클래스 (실제로 캐릭터를 생성하는 구현 클래스)
 class Information : public CharacterBuilder {
     Character* character;
 public:
-    //객체 생성 시 초기화
     Information() { this->Reset(); }
-    //소멸자에서 할당된 메모리 해제
     ~Information() { delete character; }
 
     void Reset() {
-        this->character = new Character();    // 객체 생성 및 초기화
+        this->character = new Character();   
     }
     void setName(const string& name) override {
-        character->setName(name);     // 이름 설정
+        character->setName(name);   
     }
     void setLevel(int level) override {
-        character->setLevel(level);     // 레벨 설정
+        character->setLevel(level);    
     }
     void setWeapon(const string& weapon, int weaponAttack) override {
-        character->setWeapon(weapon, weaponAttack);     // 무기, 공격력 설정
+        character->setWeapon(weapon, weaponAttack);    
     }
     void setArmor(const string& armor) override {
         character->setArmor(armor);     // 장신구 설정
     }
 
     Character* getResult() override {
-        return character;     // 최종적으로 완성된 캐릭터 객체 반환
+        return character;    
     }
 };
 
 class Director {
     CharacterBuilder* builder;
 public:
-    // 주어진 CharacterBuilder 객체를 멤버 변수 builder에 저장하는 역할
     Director(CharacterBuilder* builder) : builder(builder) {}
 
-    // 특정한 순서나 로직에 따라 빌더 클래스의 메서드 호출
     void setWarrior() {
         builder->setName("전사");
         builder->setLevel(20);
