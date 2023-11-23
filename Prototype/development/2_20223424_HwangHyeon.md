@@ -59,7 +59,7 @@ public:
 - - override는 ``Spawner`` 클래스에 있는 ``spawn`` 메서드를 오버라이드하겠다는 것을 명시적으로 나타낸다.
  
 # 자식 클래스
-수정 전 클래스
+### 수정 전 클래스
 ```C++
 class ZombieSpawner : public Spawner {
     string nameZombie;
@@ -91,7 +91,7 @@ public:
     }
 };
 ```
-수정 후 클래스 
+### 수정 후 클래스 
 ```C++
 class ZombieSpawner : public SpawnerPrototype<ZombieSpawner> {
 public:
