@@ -392,3 +392,12 @@ int main() {
 1. ``main`` 함수는 프로토타입 패턴을 사용하는 코드를 실행하는 역할을 한다.
 2. ``PrototypeFactory``를 생성하고, 이를 ``Client`` 함수에 전달하여 프로토타입이 어떻게 작동하는지 보여준다.
 3. 마지막으로, 동적으로 할당된 메모리를 삭제하여 안정적인 프로그램 종료를 보장한다.
+
+## 출력 결과
+```cin
+Let's create a Prototype 1
+Call Method from PROTOTYPE_1  with field : 90
+
+Let's create a Prototype 2
+Call Method from PROTOTYPE_2  with field : 10
+```
