@@ -1,1 +1,40 @@
+```c++
+#include <iostream>
+#include <string>
+#include <vector>
+using namespace std;
 
+class User;
+
+// 중재자 인터페이스
+class Mediator {
+protected:
+    vector<User*> users;
+
+public:
+    void addUser(User* user) {
+        users.push_back(user);
+    }
+
+    virtual void sendMessage(const User* sender, const string& message) const = 0;
+};
+
+// 유저 클래스
+class User {
+protected:
+    Mediator* mediator;
+    string userName;
+
+public:
+    User(Mediator* mediator, const string& name) : mediator(mediator), userName(name) {
+        mediator->addUser(this);
+    }
+
+    virtual void sendMessage(const string& message) const = 0;
+    virtual void receiveMessage(const string& message) const = 0;
+
+    const string& getName() const {
+        return userName;
+    }
+};
+```
