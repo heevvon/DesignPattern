@@ -58,13 +58,13 @@ public:
     ConcreteUser(Mediator* mediator, const string& name) : User(mediator, name){}
 
     void sendMessage(const string& message) const override {
-        cout << userName << " sends: " << message << endl;
+        cout << userName << "이(가) 보낸 메시지: " << message << endl;
+        cout << endl;
         mediator->sendMessage(this, message);
     }
 
     void receiveMessage(const User* sender, const string& message) const override {
-        cout << userName << " receive from " << sender->getName() << ": " << message << endl;
-
+        cout << userName << "이(가) " << sender->getName() << "에게 받은 메시지: " << message << endl;
         //정해진 메시지에 따라 자동으로 답변
         if (message == "안녕") {
             sendMessage("안녕! 나는 AIchat이야!");
