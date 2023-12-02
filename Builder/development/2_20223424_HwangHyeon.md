@@ -1,34 +1,43 @@
+# Information 클래스
 ```C++
-// 콘크리트 클래스 (실제로 캐릭터를 생성하는 구현 클래스)
 class Information : public CharacterBuilder {
     Character* character;
 public:
-    //객체 생성 시 초기화
     Information() { this->Reset(); }
-    //소멸자에서 할당된 메모리 해제
     ~Information() { delete character; }
 
     void Reset() {
-        this->character = new Character();    // 객체 생성 및 초기화
+        this->character = new Character(); 
     }
     void setName(const string& name) override {
-        character->setName(name);     // 이름 설정
+        character->setName(name);   
     }
     void setLevel(int level) override {
-        character->setLevel(level);     // 레벨 설정
+        character->setLevel(level);     
     }
     void setWeapon(const string& weapon, int weaponAttack) override {
-        character->setWeapon(weapon, weaponAttack);     // 무기, 공격력 설정
+        character->setWeapon(weapon, weaponAttack);   
     }
     void setArmor(const string& armor) override {
-        character->setArmor(armor);     // 장신구 설정
+        character->setArmor(armor);     
     }
 
     Character* getResult() override {
-        return character;     // 최종적으로 완성된 캐릭터 객체 반환
+        return character;    
     }
 };
+```
+- ``Character`` 클래스의 포인터 타입 멤버 변수가 실제 캐릭터 객체를 가리킨다.
+  > 해당 멤버 변수를 통해 ``Information`` 클래스는 빌더 패턴의 핵심 원리를 구현하고, 클라이언트에게 최종적으로 완성된 캐릭터 객체를 제공한다.
+- 생성자는 ``Reset`` 함수를 호출하여 ``character``를 초기화한다.
+  > 처음에 객체가 생성될 때마다 새로운 객체를 만들기 위한 초기화 단계
+- 소멸자는 메모리 누수를 방지하기 위해 동적으로 할당된 ``character``를 삭제한다.
+- ``Reset`` 함수는 새로운 캐릭터를 만들기 위해 ``character``를 새로운 ``Character`` 객체로 초기화한다.
+- ``set~~`` 함수는 ``character``의 ``set~~`` 메서드를 호출하여 캐릭터의 정보를 저장한다.
+- ``getResult()`` 함수는 빌더 패턴에서 정의된 ``getResult`` 메서드를 오버라이드하여, 최종적으로 완성된 캐릭터 캑체를 반환한다.
 
+# Director 클래스
+```C++
 class Director {
     CharacterBuilder* builder;
 public:
@@ -62,3 +71,9 @@ public:
     }
 };
 ```
+- ``CharacterBuilder`` 타입의 포인터 멤버 변수가 특정 빌더 객체를 가리킨다.
+  > 해당 빌더 객체를 통해 캐릭터를 구성하게 된다
+- 생성자는 빌더 객체를 받아 멤버 변수 ``builder``에 저장한다.
+  > 해당 생성자로 ``Director``가 특정 빌더 객체에 의존하여 캐릭터를 생성할 수 있도록 한다.
+- 각각의 메서드는 특정 직업에 맞는 캐릭터를 만들기 위해 빌더 객체의 메서드를 호출한다.
+  > 해당 메서드들을 통해 빌더 객체에 정의된 메서드들이 호출되고, 결국 완성된 캐릭터가 ``CharacterBuilder``에서 반환된다.
