@@ -162,10 +162,10 @@ void ClientCode(const Abstraction& abstraction) {
 	std::cout << abstraction.Operation();
 }
 ```
-* 해당 함수는 ```Abstraction 클래스```의 객체를 매개변수로 받아와서 해당 객체의 ```Operation 함수```를 호출하고 결과를 표시하는 역할을 한다.
-* 여기서 ```Abstraction 클래스```는 추상화를 나타내는 클래스이며, ```Operation 함수```는 해당 추상화가 수행하는 작업을 정의한다.
-* 클라이언트 코드에서는 ```ClientCode 함수```를 호출할 때 다양한 종류의 ```Abstraction 객체```를 전달할 수 있다.
-* 이것으로 추상화가 다양한 구현을 가진 객체와 협력할 수 있게 된다.
+- 해당 함수는 ```Abstraction``` 클래스의 객체를 매개변수로 받아와서 해당 객체의 ```Operation``` 함수를 호출하고 결과를 표시하는 역할을 한다.
+- 여기서 ```Abstraction``` 클래스는 추상화를 나타내는 클래스이며, ```Operation``` 함수는 해당 추상화가 수행하는 작업을 정의한다.
+- 클라이언트 코드에서는 ```ClientCode``` 함수를 호출할 때 다양한 종류의 ```Abstraction``` 객체를 전달할 수 있다.
+- 이것으로 추상화가 다양한 구현을 가진 객체와 협력할 수 있게 된다.
 
 ### main 함수
 ```c++
@@ -187,9 +187,9 @@ int main() {
 	return 0;
 }
 ```
-* ```ConcreteImplementationA```를 사용하여 구현 객체를 생성하고, 이를 ```Abstraction 객체```의 생성자에 전달하여 ```Abstraction 객체```를 생성한다.
-* ```ClientCode 함수```에 ```Abstraction 객체```를 전달하여 해당 객체의 ```Operation 함수```를 호출하고 결과를 출력한다. 이때, ```ConcreteImplementationA```에서 정의한 구현이 수행된다.
-* 이전에 사용된 ```implementation```과 ```abstraction```을 해제하고, ```ConcreteImplementationB```를 사용하여 새로운 구현 객체를 생성하고, 이를 ```ExtendedAbstraction 객체```의 생성자에 전달하여 ```ExtendedAbstraction 객체```를 생성한다.
-* 다시 ```ClientCode 함수```에 ```ExtendedAbstraction 객체```를 전달하여 해당 객체의 ```Operation 함수```를 호출하고 결과를 출력한다. 이번에는 ```ConcreteImplementationB```에서 정의한 구현이 수행된다.
-* 마지막으로 다시 동적으로 할당된 메모리를 해제한다.
-*이렇게 함으로써 ```Abstraction```과 ```Implementation```이 서로 독립적으로 확장될 수 있다.
+- ```ConcreteImplementationA```를 사용하여 구현 객체를 생성하고, 이를 ```Abstraction``` 객체의 생성자에 전달하여 ```Abstraction``` 객체를 생성한다.
+- ```ClientCode``` 함수에 ```Abstraction``` 객체를 전달하여 해당 객체의 ```Operation``` 함수를 호출하고 결과를 출력한다. 이때, ```ConcreteImplementationA```에서 정의한 구현이 수행된다.
+- 이전에 사용된 ```implementation```과 ```abstraction```을 해제하고, ```ConcreteImplementationB```를 사용하여 새로운 구현 객체를 생성하고, 이를 ```ExtendedAbstraction``` 객체의 생성자에 전달하여 ```ExtendedAbstraction``` 객체를 생성한다.
+- 다시 ```ClientCode``` 함수에 ```ExtendedAbstraction``` 객체를 전달하여 해당 객체의 ```Operation``` 함수를 호출하고 결과를 출력한다. 이번에는 ```ConcreteImplementationB```에서 정의한 구현이 수행된다.
+- 마지막으로 다시 동적으로 할당된 메모리를 해제한다.
+- 이렇게 함으로써 ```Abstraction```과 ```Implementation```이 서로 독립적으로 확장될 수 있다.
