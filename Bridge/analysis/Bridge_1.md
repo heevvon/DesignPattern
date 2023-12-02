@@ -193,3 +193,12 @@ int main() {
 - 다시 ```ClientCode``` 함수에 ```ExtendedAbstraction``` 객체를 전달하여 해당 객체의 ```Operation``` 함수를 호출하고 결과를 출력한다. 이번에는 ```ConcreteImplementationB```에서 정의한 구현이 수행된다.
 - 마지막으로 다시 동적으로 할당된 메모리를 해제한다.
 - 이렇게 함으로써 ```Abstraction```과 ```Implementation```이 서로 독립적으로 확장될 수 있다.
+
+### 출력 결과
+```cin
+Abstraction: Base operation with:
+ConcreteImplementationA: Here's the result on the platform A.
+
+ExtendedAbstraction: Extended operation with:
+ConcreteImplementationB: Here's the result on the platform B.
+```
