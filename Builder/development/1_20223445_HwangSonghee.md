@@ -8,9 +8,33 @@ class Character {
     string name; //직업
     int level; //레벨
     string weapon; //무기
-    int weaponAttack; //무기의 공격력
+    int weaponAttack = 1; //무기의 공격력
     string armor; //방어구
 public:
+    Character() = default;
+
+    Character(const Character& other) {
+        name = other.name;
+        level = other.level;
+        weapon = other.weapon;
+        weaponAttack = other.weaponAttack;
+        armor = other.armor;
+    }
+    // 멤버 함수
+    void setName(const string newName) {
+        name = newName;
+    }
+    void setLevel(int newLevel) {
+        level = newLevel;
+    }
+    void setWeapon(const string& newWeapon, int newWeaponAttack) {
+        weapon = newWeapon;
+        weaponAttack = newWeaponAttack;
+    }
+    void setArmor(const string& newArmor) {
+        armor = newArmor;
+    }
+
     // 캐릭터 정보 출력 함수
     void showInfo() const {
         cout << "[캐릭터 정보]" << endl;
@@ -28,17 +52,15 @@ public:
 ```c++
 };
 // 빌더 인터페이스
-class Builder {
+class CharacterBuilder {
 public:
-    virtual ~Builder() {}
+    virtual ~CharacterBuilder() {}
     virtual void setName(const string& name) = 0;
     virtual void setLevel(int level) = 0;
     virtual void setWeapon(const string& weapon, int weaponAttack) = 0;
     virtual void setArmor(const string& armor) = 0;
+    virtual Character* getResult() = 0;
 };
-int main(){
-    return 0;
-}
 ```
 *빌더 인터페이스*
 * 해당 코드에서 ```builder 클래스```는 순수 가상 함수들로 이루어진 추상 클래스이다.
