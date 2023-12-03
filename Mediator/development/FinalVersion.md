@@ -63,7 +63,7 @@ public:
 
     void receiveMessage(const User* sender, const string& message) const override {
         cout << userName << "이(가) " << sender->getName() << "에게 받은 메시지: " << message << endl;
-        //정해진 메시지에 따라 자동으로 답변
+
         if (message == "안녕") {
             sendMessage("안녕! 나는 AIchat이야!");
         }
@@ -75,10 +75,9 @@ public:
             string rm[] = { "반성문을 영어로 하면? 글로벌!", "오렌지 먹은지 얼마나 오렌지!" ,
                             "고구마가 입대하면? 군고구마!", "인천앞바다의 반댓말은? 인천 엄마다!",
                             "세상에서 가장 가난한 왕은? 최처임금!" };
-            int m = sizeof(rm) / sizeof(rm[0]); //배열의 요소수 계산
-            srand(time(NULL)); //현재 시간을 난수 계열의 시드로 사용
-
-            cout << rm[rand() % m] << endl; //답변을 랜덤하게 출력
+            int m = sizeof(rm) / sizeof(rm[0]); //
+            srand(time(NULL)); 
+            cout << rm[rand() % m] << endl; 
         }
     }
 };
