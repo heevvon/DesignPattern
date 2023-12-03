@@ -6,7 +6,7 @@ using namespace std;
 // 캐릭터 클래스
 class Character {
     string name; //직업
-    int level; //레벨
+    int level = 1; //레벨
     string weapon; //무기
     int weaponAttack = 1; //무기의 공격력
     string armor; //방어구
