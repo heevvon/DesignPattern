@@ -71,11 +71,10 @@ public:
             sendMessage("나도 반가워! AIchat을 재미있게 이용해주길 바라!");
         }
         else if (message == "재미있는 이야기 해줘") {
-            //"재미있는 이야기 해줘"의 랜덤 답변을 위한 배열
             string rm[] = { "반성문을 영어로 하면? 글로벌!", "오렌지 먹은지 얼마나 오렌지!" ,
                             "고구마가 입대하면? 군고구마!", "인천앞바다의 반댓말은? 인천 엄마다!",
                             "세상에서 가장 가난한 왕은? 최처임금!" };
-            int m = sizeof(rm) / sizeof(rm[0]); //
+            int m = sizeof(rm) / sizeof(rm[0]); 
             srand(time(NULL)); 
             cout << rm[rand() % m] << endl; 
         }
