@@ -57,7 +57,7 @@ public:
 };
 ```
 * 이어서 ```Abstraction``` 클래스를 정의한다.
-* 이 클래스는 구현 객체인 ```Implementation```을 멤버 변수로 가지고 있으며, 생성자를 통해 이 멤버 변수를 초기화한다.(가상 소멸자를 가지고 있다)
+* 이 클래스는 구현 객체인 ```Implementation```을 멤버 변수로 가지고 있으며, 생성자를 통해 이 멤버 변수를 초기화한다.(가상 소멸자를 가지고 있다.)
 * ```Operation()``` 함수는 가상 함수로, 기본 동작을 제공한다.
 * "Abstraction: Base operation with:"라는 문자열과 구현 객체인 ```Implementation```의 ```OperationImplementation()``` 함수를 호출한 결과를 반환한다.
 * 이를 통해 'Abstraction' 클래스는 구현 객체에 해당 기능을 위임하여 동작을 수행한다.
