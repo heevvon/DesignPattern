@@ -86,7 +86,7 @@ void ClientCode(const Abstraction& abstraction) {
 ```
 * ```ClientCode``` 함수는 ```Abstraction``` 클래스의 객체를 인자로 받아 해당 객체의 ```Operation()``` 함수를 호출하여 결과를 출력한다.
 
-## main
+## Main
 ```c++
 int main() {
     Implementation* implementation = new ConcreteImplementationA;
