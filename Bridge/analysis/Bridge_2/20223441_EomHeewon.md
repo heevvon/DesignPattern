@@ -16,8 +16,7 @@ public:
         return "ConcreteImplementationA: Here's the result on the platform A.\n";
     }
 };
-```
-```c++
+
 class ConcreteImplementationB : public Implementation {
 public:
     string OperationImplementation() const override {
