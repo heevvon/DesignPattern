@@ -1,6 +1,6 @@
 ```C++
 #include <iostream>
-#include <vector>
+#include <vector> // 2차원 벡터로 미로를 구현해야함
 using namespace std;
 
 class MazeGameImpl {
