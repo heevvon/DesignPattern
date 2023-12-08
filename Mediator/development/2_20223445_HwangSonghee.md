@@ -1,46 +1,13 @@
+## 헤더 파일
 ```c++
-#include <iostream>
-#include <string>
-#include <vector>
 #include <stdlib.h> //랜덤함수가 들어가 있는 헤더파일
 #include <time.h> //랜덤함수를 계속 다르게 하기 위한 함수가 들어있는 헤더파일
-using namespace std;
+```
+* 해더 파일 #include <stdlib.h>는 랜덤 함수가 들어있는 헤더 파일로 랜덤 함수인 rand를 사용하기 위해서 반드시 선언해 주어야 한다.
+* 해더 파일 #include <time.h>는 랜덤 함수를 계속 다르게 출력하게끔 하기 위해 사용한다. 랜덤 함수만 사용하면 출력 시 계속 같은 결과만 출력되기 때문에 해당 헤더 파일을 이용하여 시드를 바꾸어 출력마다 랜덤하게 나올 수 있게 한다.
 
-class User;
-
-// 중재자 인터페이스
-class Mediator {
-protected:
-    vector<User*> users;
-
-public:
-    void addUser(User* user) {
-        users.push_back(user);
-    }
-
-    virtual void sendMessage(const User* sender, const string& message) const = 0;
-};
-
-// 유저 클래스
-class User {
-protected:
-    Mediator* mediator;
-    string userName;
-
-public:
-    User(Mediator* mediator, const string& name) : mediator(mediator), userName(name) {
-        mediator->addUser(this);
-    }
-
-    virtual void sendMessage(const string& message) const = 0;
-    virtual void receiveMessage(const User* sender, const string& message) const = 0;
-
-    const string& getName() const {
-        return userName;
-    }
-};
-
-//콘크리트 중재자 클래스
+## 콘크리트 중재자 클래스
+```C++
 class ConcreteMediator : public Mediator {
 public:
     void sendMessage(const User* sender, const string& message) const override {
@@ -51,8 +18,14 @@ public:
         }
     }
 };
+```
+* 해당 클래스는 ```Mediator``` 클래스를 상속한다.
+* ```sendMessage``` 함수는 ```sender```로부터 메시지를 수신하고 다른 모든 사용자에게 해당 메시지를 전송하는 역할을 한다.
+* ```sendMessage``` 함수에서 ```user```는 ```ConcreteMediator``` 클래스에 있는 사용자 목록으로 사용자 간의 통신을 중재하는 데 사용된다.
+* ```receiveMessage```는 ```user``` 클래스에서 구현된 함수로 메시지를 수신할 때 호출되어 특정 사용자에게 메시지를 전달한다.
 
-//콘크리트 유저 클래스
+## 콘크리트 유저 클래스
+```C++
 class ConcreteUser : public User {
 public:
     ConcreteUser(Mediator* mediator, const string& name) : User(mediator, name){}
@@ -85,3 +58,7 @@ public:
     }
 };
 ```
+* 해당 클래스는 ```User``` 클래스를 상속한다.
+* ```sendMassage``` 함수는 사용자가 메시지를 보내는 역할을 한다. 메시지를 출력하고 중재자를 통해 메시지를 전송한다.
+* ```receiveMessage``` 함수는 사용자가 다른 사용자로부터 메시지를 수신할 때 호출되는 함수이다. 수신한 메시지에 따라 정해진 규칙에 따라 자동으로 답변하도록 구현된다.
+* ```receiveMassage``` 함수 내의 자동 답변은 특정한 메시지를 받으면 자동으로 답변한다. “안녕”, “반가워”, “재미있는 이야기 해줘” 등 메시지에 따라 다양한 답변을 해준다. “재미있는 이야기 해줘”의 경우 미리 정의된 문자열 배열에서 랜덤하게 답변을 출력한다.
