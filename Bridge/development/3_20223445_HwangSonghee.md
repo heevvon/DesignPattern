@@ -1,13 +1,13 @@
 ```C++
 #include <iostream>
-#include <vector> // 2차원 벡터로 미로를 구현해야함
+#include <vector> 
 using namespace std;
 
 class MazeGameImpl {
 public:
-	virtual void resetGame() = 0;    // 게임 초기화 정의
-	virtual void movePlayer(int direction) = 0;    // 방향을 매개변수로 받아 플레이어 이동 정의
-	virtual bool isGoalArrival() = 0; // 목표 지점 도달 여부 체크
+	virtual void resetGame() = 0;    
+	virtual void movePlayer(int direction) = 0;    
+	virtual bool isGoalArrival() = 0; 
 	virtual ~MazeGameImpl() {}
 };
 
@@ -15,8 +15,8 @@ class MazeGame {
 	MazeGameImpl* mazeGameImpl;
 
 	int getPlayerInput() {
-		int direction;
-		cout << "이동 방향을 선택하세요 (-1: 왼쪽, 1: 오른쪽, 2: 아래, -2: 위) : ";
+		char direction;
+		cout << "이동 방향을 선택하세요 (a: 왼쪽, d: 오른쪽, s: 아래, w: 위) : ";
 		cin >> direction;
 		return direction;
 	}
@@ -103,23 +103,22 @@ public:
     }
 
     void movePlayer(int direction) override {
-        maze[player.getPositionX()][player.getPositionY()] = '.'; // 이전 위치를 비움
+        maze[player.getPositionX()][player.getPositionY()] = '.'; 
 
         int newX = player.getPositionX();
         int newY = player.getPositionY();
 
-        // 이동 가능한지 확인하고 이동
         switch (direction) {
-        case -1: // 왼쪽
+        case 'a': // 왼쪽
             newY -= 1;
             break;
-        case 1:  // 오른쪽
+        case 'd':  // 오른쪽
             newY += 1;
             break;
-        case -2: // 위
+        case 'w': // 위
             newX -= 1;
             break;
-        case 2:  // 아래
+        case 's':  // 아래
             newX += 1;
             break;
         }
@@ -128,7 +127,7 @@ public:
             player.setPosition(newX, newY);
         }
         else {
-            player.decreaseHealth(); // 벽에 부딪혔을 때 피를 감소시킴
+            player.decreaseHealth(); 
         }
 
         maze[player.getPositionX()][player.getPositionY()] = 'P';
