@@ -1,98 +1,10 @@
 ```C++
-#include <iostream>
-#include <string>
-#include <vector>
-#include <stdlib.h> //랜덤함수가 들어가 있는 헤더파일
-#include <time.h> //랜덤함수를 계속 다르게 하기 위한 함수가 들어있는 헤더파일
-using namespace std;
-
-class User;
-
-// 중재자 인터페이스
-class Mediator {
-protected:
-    vector<User*> users;
-
-public:
-    void addUser(User* user) {
-        users.push_back(user);
-    }
-
-    virtual void sendMessage(const User* sender, const string& message) const = 0;
-};
-
-// 유저 클래스
-class User {
-protected:
-    Mediator* mediator;
-    string userName;
-
-public:
-    User(Mediator* mediator, const string& name) : mediator(mediator), userName(name) {
-        mediator->addUser(this);
-    }
-
-    virtual void sendMessage(const string& message) const = 0;
-    virtual void receiveMessage(const User* sender, const string& message) const = 0;
-
-    const string& getName() const {
-        return userName;
-    }
-};
-
-//콘크리트 중재자 클래스
-class ConcreteMediator : public Mediator {
-public:
-    void sendMessage(const User* sender, const string& message) const override {
-        for (const User* user : users) {
-            if (user != sender) {
-                user->receiveMessage(sender, message);
-            }
-        }
-    }
-};
-
-//콘크리트 유저 클래스
-class ConcreteUser : public User {
-public:
-    ConcreteUser(Mediator* mediator, const string& name) : User(mediator, name) {}
-
-    void sendMessage(const string& message) const override {
-        cout << userName << "이(가) 보낸 메시지: " << message << endl;
-        cout << endl;
-        mediator->sendMessage(this, message);
-    }
-
-    void receiveMessage(const User* sender, const string& message) const override {
-        cout << userName << "이(가) " << sender->getName() << "에게 받은 메시지: " << message << endl;
-        //정해진 메시지에 따라 자동으로 답변
-        if (message == "안녕") {
-            sendMessage("안녕! 나는 AIchat이야!");
-        }
-        else if (message == "반가워") {
-            sendMessage("나도 반가워! AIchat을 재미있게 이용해주길 바라!");
-        }
-        else if (message == "재미있는 이야기 해줘") {
-            //"재미있는 이야기 해줘"의 랜덤 답변을 위한 배열
-            string rm[] = { "반성문을 영어로 하면? 글로벌!", "오렌지 먹은지 얼마나 오렌지!" ,
-                            "고구마가 입대하면? 군고구마!", "인천앞바다의 반댓말은? 인천 엄마다!",
-                            "세상에서 가장 가난한 왕은? 최처임금!" };
-            int m = sizeof(rm) / sizeof(rm[0]); //배열의 요소수 계산
-            srand(time(NULL)); //현재 시간을 난수 계열의 시드로 사용
-
-            cout << rm[rand() % m] << endl; //답변을 랜덤하게 출력
-        }
-    }
-};
-
 int main() {
     ConcreteMediator mediator;
 
-    // 메세지를 보내는 유저1과 대답을 해주는 유저2 객체 선언1
     ConcreteUser user1(&mediator, "황현");
     ConcreteUser user2(&mediator, "AI");
 
-    // 유저1이 메세지를 보냄
     user1.sendMessage("안녕"); 
     user1.sendMessage("반가워"); 
     user1.sendMessage("재미있는 이야기 해줘"); 
@@ -101,3 +13,24 @@ int main() {
 
 }
 ```
+1. 중재자 객체 생성
+   - ``ConcreteMediator`` 클래스의 인스턴스가 생성된다.
+   - 이는 중재자 역할을 한다.
+2. 유저 객체 생성
+   - 두개의 ``ConcreteUser`` 클래스 인스턴스인 ``user1``과 ``user2``가 생성된다.
+   - 이들은 생성될 때 중재자(``mediator``)에 등록된다.
+3. 유저1이 메세지를 보냄
+   - 유저1(``황현``)은 세 개의 메세지를 중재자에게 보낸다.
+     > 메세지는 "안녕", "반가워", "재미있는 이야기 해줘"이다.
+4. 메세지 처리
+   - 유저1의 메세지 ``ConcreteMediator`` 클래스에 의해 처리된다.
+   - 중재자는 발신자를 제외한 모든 사용자에게 메세지를 브로드캐스트한다.
+   - 이 경우, 유저2(``AI``)가 이러한 메세지를 받고 적절히 응답한다.
+5. 유저2가 메세지를 받고 응답
+   - 유저2(``AI``)는 유저1(``황현``)의 메세지에 응답한다.
+   - 메세지가 "안녕"이면, "안녕! 나는 AIchat이야!"로 응답한다.
+   - 메세지가 "반가워"이면, "나도 반가워! AIchat을 재미있게 이용해주길 바라!"로 응답한다.
+   - 케세지가 "재미있는 이야기 해줘"이면, 미리 정의된 배열에서 무작위 이야기를 선택하여 출력한다.
+6. 랜덤 이야기 생성
+   - "재미있는 이야기 해줘" 메시지는 ``rm[]`` 배열에서 랜덤한 이야기를 생성한다.
+   - ``rm[]`` 배열에는 재미있는 응답들이 들어있으며, 그 중 하나가 랜덤으로 선택되어 응답으로 출력된다.
