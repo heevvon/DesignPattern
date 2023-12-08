@@ -1,41 +1,6 @@
+## 플레이어 클래스
+### 수정 전
 ```C++
-#include <iostream>
-#include <vector> 
-using namespace std;
-
-class MazeGameImpl {
-public:
-	virtual void resetGame() = 0;    
-	virtual void movePlayer(int direction) = 0;    
-	virtual bool isGoalArrival() = 0; 
-	virtual ~MazeGameImpl() {}
-};
-
-class MazeGame {
-	MazeGameImpl* mazeGameImpl;
-
-	int getPlayerInput() {
-		char direction;
-		cout << "이동 방향을 선택하세요 (a: 왼쪽, d: 오른쪽, s: 아래, w: 위) : ";
-		cin >> direction;
-		return direction;
-	}
-
-public:
-	MazeGame(MazeGameImpl* impl) : mazeGameImpl(impl) {}
-
-	void play() {
-		mazeGameImpl->resetGame();
-
-		while (!mazeGameImpl->isGoalArrival()) {
-			int direction = getPlayerInput();
-			mazeGameImpl->movePlayer(direction);
-		}
-
-		cout << "축하드립니다! 미로를 탈출하셨습니다!" << endl;
-	}
-};
-
 class Player {
 private:
     int positionX;
@@ -67,7 +32,8 @@ public:
         return health == 0;
     }
 };
-
+```
+```C++
 class Maze : public MazeGameImpl {
 private:
     vector<vector<char>> maze;
@@ -153,7 +119,8 @@ public:
         cout << "기회: " << player.getHealth() << endl << endl;
     }
 };
-
+```
+```C++
 int main() {
     Maze maze;
     MazeGameImpl* mazeGameImpl = &maze;
