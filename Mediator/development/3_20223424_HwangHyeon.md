@@ -1,3 +1,4 @@
+# main 클래스
 ```C++
 int main() {
     ConcreteMediator mediator;
