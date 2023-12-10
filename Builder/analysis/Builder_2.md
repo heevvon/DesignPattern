@@ -161,7 +161,7 @@ struct HtmlBuilder {
 * ```str()``` 함수는 현재 빌더가 가지고 있는 루트 요소를 문자열로 변환하여 반환한다.
 * ```operator HtmlElement() const```는 ```HtmlBuilder```를 ```HtmlElement```로 변환하는 연산자 오버로딩을 정의한다. 이를 통해 ```HtmlBuilder``` 객체를 ```HtmlElement```로 변환할 수 있다.
 
-### main
+### Main
 ```c++
 int main() {
     auto text = "hello";
