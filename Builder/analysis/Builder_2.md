@@ -82,9 +82,10 @@ int main() {
     builder.add_child("li", "hello").add_child("li", "world");
     cout << builder.str() << endl;
 
-    auto builder2 = HtmlElement::build("ul")
-        ->add_child_2("li", "hello")->add_child_2("li", "world");
-    cout << builder2 << endl;
+    HtmlBuilder builder2 = *HtmlElement::build("ul")
+        ->add_child_2("li", "hello")
+        ->add_child_2("li", "world");
+    cout << builder2.str() << endl;
 
     return 0;
 }
@@ -125,8 +126,8 @@ struct HtmlElement {
 * ```HtmlElement```구조체는 HTML 요소를 표현하는 구조체로, 이름(name), 텍스트(text), 하위 요소들(elements)을 포함한다.
 * ```indent_size```는 들여쓰기에 사용될 크기를 나타내는 상수이다. 들여쓰기 크기를 2로 설정했으므로, 2칸씩 들여쓰기가 적용된다.
 * 이후 이름과 텍스트를 인자로 받아 ```HtmlElement``` 객체를 초기화한다.
-* ```str 함수```는 현재 HTML 요소를 문자열 형태로 반환하는 함수로, 들여쓰기를 적용하여 HTML 요소를 문자열로 표현한다.
-* ```build 함수```는 ```HtmlBuilder``` 객체를 생성하는 정적 함수이다.
+* ```str```함수는 현재 HTML 요소를 문자열 형태로 반환하는 함수로, 들여쓰기를 적용하여 HTML 요소를 문자열로 표현한다.
+* ```build```함수는 ```HtmlBuilder``` 객체를 생성하는 정적 함수이다.
 
 ### HtmlBuilder
 ```c++
@@ -182,9 +183,10 @@ int main() {
     builder.add_child("li", "hello").add_child("li", "world");
     cout << builder.str() << endl;
 
-    auto builder2 = HtmlElement::build("ul")
-        ->add_child_2("li", "hello")->add_child_2("li", "world");
-    cout << builder2 << endl;
+    HtmlBuilder builder2 = *HtmlElement::build("ul")
+        ->add_child_2("li", "hello")
+        ->add_child_2("li", "world");
+    cout << builder2.str() << endl;
 
     return 0;
 }
@@ -195,3 +197,32 @@ int main() {
 * 빌더 패턴을 사용하여 HTML 요소를 구성하고, ```HtmlBuilder```를 통해 HTML 요소를 문자열로 변환하여 출력한다.
 
 다양한 방식으로 HTML을 생성하고 출력한다. 직접 문자열을 조합, 문자열 스트림을 사용하여 조합하거나 객체 지향적인 방법으로 빌더 패턴을 활용하여 HTML 요소를 조립한 후 문자열로 변환하여 출력하는 방법을 보여준다.
+
+## 출력 결과
+```c++
+<p>hello</p>
+----------
+<ul>
+  <li>hello</li>
+  <li>world</li>
+</ul>
+----------
+<ul>
+  <li>
+    hello
+  </li>
+  <li>
+    world
+  </li>
+</ul>
+
+----------
+<ul>
+  <li>
+    hello
+  </li>
+  <li>
+    world
+  </li>
+</ul>
+```
